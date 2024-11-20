@@ -1,7 +1,7 @@
 import React from 'react'
 import { imgPath } from '../helpers/functions-general'
 
-const SideNav = () => {
+const SideNav = ({setCategory}) => {
 
   const menus = [
     {
@@ -38,14 +38,18 @@ const SideNav = () => {
     },
     
   ]
+
+  const handleGetCategory = (category) => {
+    setCategory(category)
+  }
   return (
     <>
       <h5 className="mb-0 text-center pt-2 text-sm">Menu</h5>
 
       <ul>
         {menus.map((item, key)=>(
-          <li className="mb-3">
-          <button><img src={`${imgPath}/${item.img}`} />
+          <li className="mb-3" key={key}>
+          <button onClick={() => handleGetCategory(item.title)}><img src={`${imgPath}/${item.img}`} />
           <small className="text-xs">{item.title}</small>
         </button>
         </li>

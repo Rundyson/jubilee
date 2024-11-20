@@ -15,7 +15,7 @@ const Welcome = () => {
             <div className="bg-primary text-white text-center p-4">
                 <Link to="/order" className="text-4xl font-bold flex gap-5 justify-center items-center"><Pointer size={30} className="rotate-[-30deg]"/>Tap Here to Start</Link>
             </div>
-        </div>
+        
 
         <div className="bg-white p-4 flex justify-between items-center">
             
@@ -30,6 +30,7 @@ const Welcome = () => {
             </div>
 
         </div>
+        </div>  
     </main>
     </>
   )
