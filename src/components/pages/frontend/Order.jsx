@@ -22,7 +22,7 @@ const Order = () => {
     <div className="grid grid-rows-[auto,_1fr,_auto] min-h-[calc(100vh-200px)]">
         
         <MenuTitle category={category}/>
-        <section className="grid grid-cols-[150px_1fr] bg-primary px-3">
+        <section className="grid grid-cols-[150px_1fr] bg-myRed px-3">
 
             <aside className="custom-scroll m-1 bg-white rounded-md h-[60vh] overflow-y-scroll">
                 <SideNav setCategory={setCategory}/>
@@ -35,9 +35,9 @@ const Order = () => {
 
         </section>
 
-        <div className="flex p-1 px-3 justify-between items-center bg-primary text-white">
+        <div className="flex p-1 px-3 justify-between items-center bg-myRed text-white">
 
-            <button className="px-4 py-2 bg-white text-primary border border-white rounded-md">
+            <button className="px-4 py-2 bg-white text-myRed border border-white rounded-md">
                 Cancel
             </button>
 
@@ -46,9 +46,9 @@ const Order = () => {
                 <h3 className="mb-0">P {getTotal.toFixed(2)}</h3>
             </div>
 
-            <button className="px-4 py-2  bg-secondary text-white rounded-md relative" onClick={() => setShowCart(true)}>
+            <button className="px-4 py-2  bg-myYellow text-white rounded-md relative" onClick={() => setShowCart(true)}>
                 {cartData.length >= 0 && (
-                    <span className="absolute -left-2 -top-2 text-[12px] bg-white text-primary rounded-full size-[20px] font-bold grid place-content-center">{cartData.length}</span>
+                    <span className="absolute -left-2 -top-2 text-[12px] bg-white text-myYellow rounded-full size-[20px] font-bold grid place-content-center">{cartData.length}</span>
                 )}
                 
                 View Cart

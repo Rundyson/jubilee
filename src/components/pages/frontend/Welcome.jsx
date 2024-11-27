@@ -1,5 +1,5 @@
 import React from 'react'
-import { imgPath } from '../helpers/functions-general'
+import { imgPath } from '../../helpers/functions-general'
 import { Link } from 'react-router-dom'
 import {  CircleCheck, Pointer } from 'lucide-react'
 
@@ -12,7 +12,7 @@ const Welcome = () => {
         <img src={`${imgPath}/Welcome-banner.jpg`} alt="" className="h-full w-full block object-cover"/>
 
         <div className="absolute w-full bottom-0 left-0">
-            <div className="bg-primary text-white text-center p-4">
+            <div className="bg-myRed text-white text-center p-4">
                 <Link to="/order" className="text-4xl font-bold flex gap-5 justify-center items-center"><Pointer size={30} className="rotate-[-30deg]"/>Tap Here to Start</Link>
             </div>
         
@@ -24,8 +24,8 @@ const Welcome = () => {
                 <h4 className="mb-0 leading-[1.1]">Pay with Cash <br /> or Card</h4>
             </div>
 
-            <div className="pl-4 border-l-4 border-primary basis-[300px]">
-                <h5 className="text-primary mb-1">For other Payments</h5>
+            <div className="pl-4 border-l-4 border-myRed basis-[300px]">
+                <h5 className="text-myRed mb-1">For other Payments</h5>
                 <p className="text-xs text-black opacity-60">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed corrupti tempore </p>
             </div>
 

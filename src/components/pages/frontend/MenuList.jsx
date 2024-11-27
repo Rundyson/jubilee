@@ -1,5 +1,5 @@
 import React from 'react'
-import { imgPath } from '../helpers/functions-general'
+import { imgPath } from '../../helpers/functions-general'
 import { menus } from '../backend/menu-data';
 
 const MenuList = ({category, cartData, setCartData, setIsSuccess}) => {

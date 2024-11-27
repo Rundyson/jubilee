@@ -1,5 +1,5 @@
 import React from 'react'
-import { imgPath } from '../helpers/functions-general'
+import { imgPath } from '../../helpers/functions-general'
 
 const SideNav = ({setCategory}) => {
 
