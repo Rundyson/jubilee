@@ -10,9 +10,10 @@ import { StoreContext } from '@/components/store/storeContext'
 import { setIsAdd, setIsConfirm, setIsDelete, setIsEdit } from '@/components/store/storeAction'
 import ModalDelete from '../partials/modals/ModalDelete'
 import ModalConfirm from '../partials/modals/ModalConfirm'
+import { menus } from '../menu-data'
 
 
-const AdvertisementTable = () => {
+const AdvertisementTable = ({setItemEdit}) => {
   const {store, dispatch } = React.useContext(StoreContext);
 
   let counter = 1;
@@ -26,8 +27,9 @@ const AdvertisementTable = () => {
   const handleArchive = () => {
     dispatch(setIsConfirm(true));
   }
-  const handleEdit = () => {
+  const handleEdit = (item) => {
     dispatch(setIsAdd(true));
+    setItemEdit(item);
   }
  
   return (
@@ -42,6 +44,8 @@ const AdvertisementTable = () => {
                               <th>#</th>
                               <th>Status</th>
                               <th className='w-[50%]'>Title</th>
+                              <th> Category</th>
+                              <th>Price</th>
                               <th></th>
                             </tr>
                           </thead>
@@ -56,30 +60,33 @@ const AdvertisementTable = () => {
                                 <IconServerError/>
                               </td>
                             </tr> */}
-                         {Array.from(Array(6).keys()).map((i) => (
-                            <tr key={i}>
-                            <td>{counter++}</td>
-                            <td><Pills/></td>
-                            <td>Advertisement</td>
-                            <td>
-                              <ul className="table-action " >
-                                {true ? (<>
-                                <li>
-                                  <button className='tooltip' data-tooltip="Edit" onClick={() => handleEdit()}><FilePenLine /></button>
-                                </li>
-                                <li><button className='tooltip' data-tooltip="Archive" onClick={() => handleArchive()}><Archive/></button></li>
-                                </>) : (<>
+                            {menus.map((item, key) => (
+                              <tr key={key}>
+                              <td>{counter++}</td>
+                              <td><Pills/></td>
+                              <td>{item.menu_title}</td>
+                              <td>{item.menu_category}</td>
+                              <td>{item.menu_price}</td>
+                              <td>
+                                <ul className="table-action " >
+                                  {true ? (<>
                                   <li>
-                                  <button className='tooltip' data-tooltip="Restore" onClick={() => handleRestore()}><ArchiveRestore /></button>
+                                    <button className='tooltip' data-tooltip="Edit" onClick={() => handleEdit(item)}><FilePenLine /></button>
                                   </li>
-                                <li>
-                                  <button className='tooltip' data-tooltip="Delete" onClick={() => handleDelete()}><Trash2 /></button>
-                                  </li>
-                                </>)}
-                              </ul>
-                            </td>
-                          </tr>
-                         ))}
+                                  <li><button className='tooltip' data-tooltip="Archive" onClick={() => handleArchive()}><Archive/></button></li>
+                                  </>) : (<>
+                                    <li>
+                                    <button className='tooltip' data-tooltip="Restore" onClick={() => handleRestore()}><ArchiveRestore /></button>
+                                    </li>
+                                  <li>
+                                    <button className='tooltip' data-tooltip="Delete" onClick={() => handleDelete()}><Trash2 /></button>
+                                    </li>
+                                  </>)}
+                                </ul>
+                              </td>
+                            </tr>
+                            ))}
+                            
                               
 
                           </tbody>

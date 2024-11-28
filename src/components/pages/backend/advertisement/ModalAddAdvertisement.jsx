@@ -8,26 +8,32 @@ import { Form, Formik } from 'formik'
 import { InputPhotoUpload, InputSelect, InputText} from '@/components/helpers/FormInputs'
 import * as Yup from "Yup";
 import useUploadPhoto from '@/components/custom-hook/useUploadPhoto'
+import { imgPath } from '@/components/helpers/functions-general'
 
-const ModalAddAdvertisement = () => {
+const ModalAddAdvertisement = ({itemEdit}) => {
   const {dispatch} = React.useContext(StoreContext);
   const { uploadPhoto, handleChangePhoto, photo } = useUploadPhoto("");   
 
   const handleClose = () => {
     dispatch(setIsAdd(false));
   }
+  console.log(itemEdit)
   const initVal = {
-      advertisement_title: "",
+      menu_title: itemEdit ? itemEdit.menu_title : "",
+      menu_category: itemEdit ? itemEdit.menu_category : "",
+      menu_price: itemEdit ? itemEdit.menu_price : "",
   };
   const yupSchema = Yup.object({
-    advertisement_title: Yup.string().required("Required"),
+    menu_title: Yup.string().required("Required"),
+    menu_category: Yup.string().required("Required"),
+    menu_price: Yup.string().required("Required"),
   });
   return (
     <>
         <ModalWrapper>
             <div className="modal-side absolute top-0 right-0 bg-primary h-[100dvh] w-[300px] border-l border-line">
                 <div className="modal-header p-4 flex justify-between items-center">
-                    <h5 className="mb-0">Add Advertisement</h5>
+                    <h5 className="mb-0">Add Advertisements</h5>
                     <button onClick={handleClose}><X/></button>
                 </div>
 
@@ -50,12 +56,12 @@ const ModalAddAdvertisement = () => {
                             <InputText 
                             label="Title"
                             type="text"
-                            name="advertisement_title"/>
+                            name="menu_title"/>
                     </div>
                   
-                    <div className="input-wrap relative  group input-photo-wrap h-[150px]">
+                    <div className="input-wrap relative  group input-photo-wrap h-[150px] mb-8">
                         <label htmlFor="">Photo</label>
-                {photo === null ? (
+                {itemEdit === null ? (
                   <div className="w-full border border-line rounded-md flex justify-center items-center flex-col h-full">
                     <ImagePlusIcon
                       size={50}
@@ -69,9 +75,9 @@ const ModalAddAdvertisement = () => {
                 ) : (
                   <img
                     src={
-                      true
+                      itemEdit === null
                         ? URL.createObjectURL(photo) // preview
-                        : imgPath + "/" + itemEdit?.movies_image // check db
+                        : imgPath + "/" + itemEdit?.menu_image // check db
                     }
                     alt="employee photo"
                     className={`group-hover:opacity-30 duration-200 relative object-cover h-full w-full  m-auto `}
@@ -88,6 +94,31 @@ const ModalAddAdvertisement = () => {
                           className={`opacity-0 absolute top-0 right-0 bottom-0 left-0 rounded-full  m-auto cursor-pointer w-full h-full 
                           `}
                         />
+                    </div>
+
+                    <div className="input-wrap">
+                            <InputSelect 
+                            label="Select Category"
+                            type="text"
+                            name="menu_category">
+                              <option value="" hidden>Select Advertisement Category</option>
+                                <option value="Desserts">Dessert</option>
+                                <option value="Value Meal">Value Meal</option>
+                                <option value="Chicken Joy">Chicken Joy</option>
+                                <option value="Burger Steak">Burger Steak</option>
+                                <option value="Burger">Burgers</option>
+                                <option value="Palabok">Palabok</option>
+                                <option value="Fries">Fries</option>
+                                <option value="Sides">Sides</option>
+                                <option value="Spaghetti">Spaghetti</option>
+                            </InputSelect>
+                    </div>
+
+                    <div className="input-wrap">
+                            <InputText 
+                            label="Price"
+                            type="text"
+                            name="menu_price"/>
                     </div>
 
                     </div>

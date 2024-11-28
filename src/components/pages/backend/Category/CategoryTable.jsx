@@ -12,7 +12,7 @@ import ModalDelete from '../partials/modals/ModalDelete'
 import ModalConfirm from '../partials/modals/ModalConfirm'
 
 
-const CategoryTable = () => {
+const CategoryTable = ({setItemEdit}) => {
   const {store, dispatch } = React.useContext(StoreContext);
 
   let counter = 1;
@@ -26,8 +26,9 @@ const CategoryTable = () => {
   const handleArchive = () => {
     dispatch(setIsConfirm(true));
   }
-  const handleEdit = () => {
+  const handleEdit = (item) => {
     dispatch(setIsAdd(true));
+    setItemEdit(item);
   }
  
   return (
@@ -65,7 +66,7 @@ const CategoryTable = () => {
                               <ul className="table-action " >
                                 {true ? (<>
                                 <li>
-                                  <button className='tooltip' data-tooltip="Edit" onClick={() => handleEdit()}><FilePenLine /></button>
+                                  <button className='tooltip' data-tooltip="Edit" onClick={() => handleEdit(item)}><FilePenLine /></button>
                                 </li>
                                 <li><button className='tooltip' data-tooltip="Archive" onClick={() => handleArchive()}><Archive/></button></li>
                                 </>) : (<>

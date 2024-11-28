@@ -5,8 +5,8 @@ import SpinnerButton from '../partials/spinners/SpinnerButton'
 import { StoreContext } from '@/components/store/storeContext'
 import { setIsAdd } from '@/components/store/storeAction'
 import { Form, Formik } from 'formik'
-import { InputPhotoUpload, InputSelect, InputText} from '@/components/helpers/FormInputs'
 import * as Yup from "Yup";
+import { InputPhotoUpload, InputSelect, InputText} from '@/components/helpers/FormInputs'
 import useUploadPhoto from '@/components/custom-hook/useUploadPhoto'
 
 const ModalAddCategory = () => {
@@ -16,12 +16,18 @@ const ModalAddCategory = () => {
   const handleClose = () => {
     dispatch(setIsAdd(false));
   }
+  console.log(itemEdit)
   const initVal = {
-      category_title: "",
-  };
-  const yupSchema = Yup.object({
-    category_title: Yup.string().required("Required"),
-  });
+    menu_title: itemEdit ? itemEdit.menu_title : "",
+    menu_category: itemEdit ? itemEdit.menu_category : "",
+    menu_price: itemEdit ? itemEdit.menu_price : "",
+};
+const yupSchema = Yup.object({
+  menu_title: Yup.string().required("Required"),
+  menu_category: Yup.string().required("Required"),
+  menu_price: Yup.string().required("Required"),
+});
+
   return (
     <>
         <ModalWrapper>
@@ -55,7 +61,7 @@ const ModalAddCategory = () => {
                   
                     <div className="input-wrap relative  group input-photo-wrap h-[150px]">
                         <label htmlFor="">Photo</label>
-                {photo === null ? (
+                {itemEdit === null ? (
                   <div className="w-full border border-line rounded-md flex justify-center items-center flex-col h-full">
                     <ImagePlusIcon
                       size={50}
@@ -69,7 +75,7 @@ const ModalAddCategory = () => {
                 ) : (
                   <img
                     src={
-                      true
+                      itemEdit === null
                         ? URL.createObjectURL(photo) // preview
                         : imgPath + "/" + itemEdit?.movies_image // check db
                     }
