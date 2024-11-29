@@ -20,13 +20,11 @@ const ModalAddAdvertisement = ({itemEdit}) => {
   console.log(itemEdit)
   const initVal = {
       menu_title: itemEdit ? itemEdit.menu_title : "",
-      menu_category: itemEdit ? itemEdit.menu_category : "",
-      menu_price: itemEdit ? itemEdit.menu_price : "",
+
   };
   const yupSchema = Yup.object({
     menu_title: Yup.string().required("Required"),
-    menu_category: Yup.string().required("Required"),
-    menu_price: Yup.string().required("Required"),
+
   });
   return (
     <>
@@ -49,7 +47,7 @@ const ModalAddAdvertisement = ({itemEdit}) => {
 
             <Form>
 
-                <div className="modal-form max-h-[calc(100vh-56px)] h-full grid grid-rows-[1fr_auto]">
+                <div className="modal-form h-[calc(100vh-56px)] h-full grid grid-rows-[1fr_auto]">
                     <div className="form-wrapper p-4 max-h-[85vh] h-full overflow-y-auto custom-scroll">
 
                     <div className="input-wrap">
@@ -94,31 +92,6 @@ const ModalAddAdvertisement = ({itemEdit}) => {
                           className={`opacity-0 absolute top-0 right-0 bottom-0 left-0 rounded-full  m-auto cursor-pointer w-full h-full 
                           `}
                         />
-                    </div>
-
-                    <div className="input-wrap">
-                            <InputSelect 
-                            label="Select Category"
-                            type="text"
-                            name="menu_category">
-                              <option value="" hidden>Select Advertisement Category</option>
-                                <option value="Desserts">Dessert</option>
-                                <option value="Value Meal">Value Meal</option>
-                                <option value="Chicken Joy">Chicken Joy</option>
-                                <option value="Burger Steak">Burger Steak</option>
-                                <option value="Burger">Burgers</option>
-                                <option value="Palabok">Palabok</option>
-                                <option value="Fries">Fries</option>
-                                <option value="Sides">Sides</option>
-                                <option value="Spaghetti">Spaghetti</option>
-                            </InputSelect>
-                    </div>
-
-                    <div className="input-wrap">
-                            <InputText 
-                            label="Price"
-                            type="text"
-                            name="menu_price"/>
                     </div>
 
                     </div>
