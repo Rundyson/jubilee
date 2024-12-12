@@ -45,7 +45,10 @@ const Food = () => {
         {store.error && <ModalError/>}
       {store.success && <ToastSuccess/>}
         {/* <SpinnerWindow/> */}
-        {store.isAdd && <ModalAddFood itemEdit={itemEdit}/>}
+        {store.isAdd && 
+        (<ModalAddFood 
+        itemEdit={itemEdit}
+        />)}
     </>
   )
 }

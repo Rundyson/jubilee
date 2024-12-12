@@ -44,8 +44,8 @@ const AdvertisementTable = ({setItemEdit}) => {
                               <th>#</th>
                               <th>Status</th>
                               <th className='w-[50%]'>Title</th>
-                              <th> Category</th>
-                              <th>Price</th>
+                              <th></th>
+                              <th></th>
                               <th></th>
                             </tr>
                           </thead>
@@ -65,8 +65,8 @@ const AdvertisementTable = ({setItemEdit}) => {
                               <td>{counter++}</td>
                               <td><Pills/></td>
                               <td>{item.menu_title}</td>
-                              <td>{item.menu_category}</td>
-                              <td>{item.menu_price}</td>
+                              <td></td>
+                              <td></td>
                               <td>
                                 <ul className="table-action " >
                                   {true ? (<>

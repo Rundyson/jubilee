@@ -10,9 +10,12 @@ import Dashboard from './components/pages/backend/dashboard/Dashboard'
 import Login from './components/pages/backend/access/Login'
 import SetPassword from './components/pages/backend/access/SetPassword'
 import ForgotPassword from './components/pages/backend/access/ForgotPassword'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const App = () => {
+  const queryClient = new QueryClient();
   return (
+    <QueryClientProvider client={queryClient}>
     <StoreProvider>
     <Router>
       <Routes>
@@ -29,6 +32,7 @@ const App = () => {
       </Routes>
     </Router>
     </StoreProvider>
+    </QueryClientProvider>
   );
 };
 
