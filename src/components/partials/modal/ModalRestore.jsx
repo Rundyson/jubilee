@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import ButtonSpinner from "../spinner/ButtonSpinner";
 import { StoreContext } from "@/components/store/storeContext";
-import { setIsRestore } from "@/components/store/storeAction";
+import { setError, setIsRestore, setMessage, setSuccess } from "@/components/store/storeAction";
 import { FaTrashRestore } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
 
@@ -22,14 +22,17 @@ const ModalRestore = ({ setIsArchive, mysqlEndpoint, queryKey, item }) => {
       queryClient.invalidateQueries({ queryKey: [queryKey] });
       // dispatch(setIsDelete(false));
 
-      if (!data.success) {
-        console.log("May error!");
-      } else {
-        dispatch(setIsRestore(false));
-        console.log("Naysuu!");
-      }
-    },
-  });
+       if (!data.success) {
+                   dispatch(setError(true));
+                   dispatch(setMessage(data.error));
+                   dispatch(setSuccess(false));
+                 } else {
+                   dispatch(setIsRestore(false));
+                   dispatch(setSuccess(true));
+                   dispatch(setMessage("Successful!"));
+                 } 
+         },
+       });
 
   const handleYes = async () => {
     // mutate data

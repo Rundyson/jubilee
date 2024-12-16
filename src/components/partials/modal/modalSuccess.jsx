@@ -1,7 +1,7 @@
 import React from "react";
-import { setSuccess } from "../../../store/StoreAction";
-import { StoreContext } from "../../../store/StoreContext";
 import { GetFocus, devNavUrl } from "../../helpers/functions-general";
+import { StoreContext } from "@/components/store/storeContext";
+import { setSuccess } from "@/components/store/storeAction";
 
 const ModalSuccess = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -48,7 +48,7 @@ const ModalSuccess = () => {
             </svg>
             <span className="sr-only">Check icon</span>
           </div>
-          <div className="ms-3 text-sm font-normal pr-4 ">{store.message}</div>
+          <div className="ms-3 text-sm font-normal pr-4 text-black">{store.message}</div>
         </div>
 
         <button

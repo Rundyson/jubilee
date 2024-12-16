@@ -26,7 +26,7 @@ const Dashboard = () => {
             <div className="layout-division">
             <SideNavigation menu="dashboard"/>
                 <main>
-                    <Header title="Dashboard" subtitle="Welcome to Jolliebee"/>
+                    <Header title="Dashboard" subtitle="Welcome to Jollibee"/>
                     <div className="p-8">
                       <div className="grid grid-cols-[1fr_400px] gap-5">
 

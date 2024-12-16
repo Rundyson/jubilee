@@ -2,6 +2,7 @@ import { ChartBarStacked, Clapperboard, HandPlatter, LayoutDashboard, Megaphone,
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { imgPath } from '../../../helpers/functions-general';
+import { FaCog } from 'react-icons/fa';
 
 const SideNavigation = ({menu}) => {
 
@@ -25,6 +26,11 @@ const SideNavigation = ({menu}) => {
             title: "Category",
             slug: "/admin/category",
             icon: <ChartBarStacked size={16}/>,
+        },
+        {
+            title: "Settings",
+            slug: "/admin/settings",
+            icon: <FaCog size={16}/>,
         },
     ];
 
