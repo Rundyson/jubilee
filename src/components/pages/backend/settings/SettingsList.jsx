@@ -5,17 +5,17 @@ const SettingsList = () => {
       const links = [
         {
             title: "Role",
-            slug: "/settings/role",
+            slug: "/admin/settings/role",
             icon: <FaUsersCog size={16}/>,
         },
         {
             title: "Developer",
-            slug: "/settings/developer",
+            slug: "/admin/settings/developer",
             icon: <FaDev size={16}/>,
         },
         {
             title: "Users",
-            slug: "/settings/users",
+            slug: "/admin/settings/users",
             icon: <FaUsers size={16}/>,
         },
       ]

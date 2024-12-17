@@ -22,6 +22,7 @@ import useQueryData from "@/components/custom-hook/useQueryData";
 import Status from "@/components/partials/Status";
 import ModalArchive from "@/components/partials/modal/ModalArchive";
 import ModalRestore from "@/components/partials/modal/ModalRestore";
+import NoData from "@/components/partials/NoData";
 
 const FoodTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -45,6 +46,7 @@ const FoodTable = ({ setItemEdit }) => {
     setItemEdit(item);
   };
   const {
+    isLoading,
     isFetching,
     error,
     data: result,
@@ -62,9 +64,8 @@ const FoodTable = ({ setItemEdit }) => {
   return (
     <>
       <div className="mt-10 bg-secondary rounded-md p-4 border border-line relative">
-        {/* <SpinnerTable/> */}
+        {isFetching && !isLoading && <SpinnerTable />}
         <div className="table-wrapper custom-scroll">
-          {/* <TableLoader count={10} cols={4}/> */}
           <table>
             <thead>
               <tr>
@@ -77,61 +78,41 @@ const FoodTable = ({ setItemEdit }) => {
               </tr>
             </thead>
             <tbody>
-              {/* <tr>
-                              <td colSpan={100}>
-                                <IconNoData/>
-                              </td>
-                            </tr> */}
-              {/* <tr>
-                              <td colSpan={100}>
-                                <IconServerError/>
-                              </td>
-                            </tr> */}
-              {/* {menus.map((item, key) => (
-                              <tr key={key}>
-                              <td>{counter++}</td>
-                              <td><Pills/></td>
-                              <td>{item.menu_title}</td>
-                              <td>{item.menu_category}</td>
-                              <td>{item.menu_price}</td>
-                              <td>
-                                <ul className="table-action " >
-                                  {true ? (<>
-                                  <li>
-                                    <button className='tooltip' data-tooltip="Edit" onClick={() => handleEdit(item)}><FilePenLine /></button>
-                                  </li>
-                                  <li><button className='tooltip' data-tooltip="Archive" onClick={() => handleArchive()}><Archive/></button></li>
-                                  </>) : (<>
-                                    <li>
-                                    <button className='tooltip' data-tooltip="Restore" onClick={() => handleRestore()}><ArchiveRestore /></button>
-                                    </li>
-                                  <li>
-                                    <button className='tooltip' data-tooltip="Delete" onClick={() => handleDelete()}><Trash2 /></button>
-                                    </li>
-                                  </>)}
-                                </ul>
-                              </td>
-                            </tr>
-                            ))} */}
+              {isLoading && (
+                <tr>
+                  <td colSpan="100%">
+                    <TableLoader count={20} cols={4} />
+                  </td>
+                </tr>
+              )}
+              {result?.count === 0 && (
+                <tr>
+                  <td colSpan={100}>
+                    <IconNoData />
+                  </td>
+                </tr>
+              )}
+              {error && (
+                <tr>
+                  <td colSpan={100}>
+                    <IconServerError />
+                  </td>
+                </tr>
+              )}
 
               {result?.count > 0 &&
                 result.data.map((item, key) => (
                   <tr key={key}>
                     <td>{counter++}</td>
                     <td>
-                      {" "}
-                      {item.food_is_active === 1 ? (
-                        <Status text="Active" />
-                      ) : (
-                        <Status text="Inactive" />
-                      )}
+                      <Pills isActive={item.food_is_active} />
                     </td>
                     <td>{item.food_title}</td>
                     <td>{item.category_title}</td>
                     <td>P {item.food_price}</td>
                     <td>
                       <ul className="table-action ">
-                        {item.food_is_active  ? (
+                        {item.food_is_active ? (
                           <>
                             <li>
                               <button
@@ -186,10 +167,7 @@ const FoodTable = ({ setItemEdit }) => {
         </div>
       </div>
       {store.isDelete && (
-        <ModalDelete
-          mysqlApiDelete={`/v2/food/${id}`}
-          queryKey={"food"}
-        />
+        <ModalDelete mysqlApiDelete={`/v2/food/${id}`} queryKey={"food"} />
       )}
       {store.isArchive && (
         <ModalArchive

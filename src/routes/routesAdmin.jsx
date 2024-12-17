@@ -4,6 +4,7 @@ import Dashboard from "@/components/pages/backend/dashboard/Dashboard";
 import Food from "@/components/pages/backend/foods/Food";
 import Role from "@/components/pages/backend/settings/role/Role";
 import Settings from "@/components/pages/backend/settings/Settings";
+import User from "@/components/pages/backend/settings/users/User";
 
 export const routeAdmin = [
   {
@@ -35,7 +36,7 @@ export const routeAdmin = [
     element: <Role />,
   },
   {
-    route: "/admin/settings/user",
-    element: <Role />,
+    route: "/admin/settings/users",
+    element: <User />,
   },
 ];

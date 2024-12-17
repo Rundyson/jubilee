@@ -19,6 +19,7 @@ import FetchingSpinner from "@/components/partials/spinner/FetchingSpinner";
 import TableLoader from "../../partials/TableLoader";
 import Pills from "../../partials/Pills";
 import ModalDelete from "@/components/partials/modal/ModalDelete";
+import SpinnerTable from "../../partials/spinners/SpinnerTable";
 
 const UserList = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -57,7 +58,7 @@ const UserList = ({ setItemEdit }) => {
   return (
     <>
       <div className="mt-10 bg-secondary rounded-md p-4 border border-line relative">
-        {isFetching && !isLoading && <FetchingSpinner />}
+        {isFetching && !isLoading && <SpinnerTable />}
         <div className="table-wrapper custom-scroll">
           <table>
             <thead>
