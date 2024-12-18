@@ -153,7 +153,7 @@ const ModalAddFood = ({ itemEdit }) => {
                             }`}
                           />
                         )}
-                        
+
                         <InputPhotoUpload
                           name="photo"
                           type="file"
@@ -166,7 +166,7 @@ const ModalAddFood = ({ itemEdit }) => {
                         />
                       </div>
 
-                      <div className="input-wrap">
+                      <div className="input-wrap mt-8">
                         <InputSelect
                           label="Food Category"
                           type="text"
@@ -179,8 +179,8 @@ const ModalAddFood = ({ itemEdit }) => {
                               <>
                                 {item.category_is_active === 1 && (
                                   <option key={key} value={item.category_aid}>
-                                  {item.category_title}
-                                </option>
+                                    {item.category_title}
+                                  </option>
                                 )}
                               </>
                             );
@@ -199,8 +199,7 @@ const ModalAddFood = ({ itemEdit }) => {
                     </div>
                     <div className="form-action flex p-4 justify-end gap-3">
                       <button className="btn btn-accent" type="submit">
-                        <SpinnerButton />
-                        Save
+                        {mutation.isPending ? <SpinnerButton /> : "Save"}
                       </button>
                       <button
                         className="btn btn-cancel"

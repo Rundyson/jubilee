@@ -37,12 +37,14 @@ const SearchBarWithFilterStatus = ({
     }
   };
   const handleChangeStatus = (e, setStatusFilter) => {
+    search.current.value = "";
     setStatusFilter(e.target.value);
     setIsFilter(false);
     if (e.target.value !== ""){
       setIsFilter(true);
     }
   };
+
 
   return (
     <form
@@ -58,7 +60,9 @@ const SearchBarWithFilterStatus = ({
             onChange={(e) => handleChangeStatus(e, setStatusFilter)}
             className="bg-secondary border border-line rounded-md outline-none placeholder:opacity-30 placeholder:text-sm w-fit h-[34px] cursor-pointer"
           >
-            <optgroup label="Select a Status">
+            <optgroup
+              label="Select a Status"
+            >
               <option value="">All</option>
               <option value="1">Active</option>
               <option value="0">Inactive</option>

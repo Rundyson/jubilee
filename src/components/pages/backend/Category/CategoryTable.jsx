@@ -59,7 +59,6 @@ const CategoryTable = ({ setItemEdit, setIsCategoryEdit, isCategoryEdit }) => {
     dispatch(setIsAdd(true));
     setIsCategoryEdit(item);
   };
-
   // const {
   //   isLoading,
   //   isFetching,
@@ -172,7 +171,7 @@ const CategoryTable = ({ setItemEdit, setIsCategoryEdit, isCategoryEdit }) => {
                         <td>{item.category_title}</td>
                         <td
                           colSpan="100%"
-                          className="opacity-0 group-hover:opacity-100"
+                          className="opacity-100"
                         >
                           <div className="flex items-center justify-end gap-2 mr-4">
                             {item.category_is_active === 1 ? (

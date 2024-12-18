@@ -19,12 +19,12 @@ const Loadmore = ({
           <button
             type="button"
             disabled={isFetchingNextPage}
-            className="loadmore h-full relative my-8 text-primary p-1.5 rounded-full w-36 disabled:opacity-50 disabled:cursor-not-allowed disabled:!bg-transparent"
+            className="loadmore h-full relative my-2 text-primary p-1.5 rounded-full w-36 disabled:opacity-50 disabled:cursor-not-allowed disabled:!bg-transparent"
           >
             <ButtonSpinner />
           </button>
         ) : (
-          <div className="loadmore my-8 p-1.5 text-center text-xs">
+          <div className="loadmore my-2 p-1.5 text-center text-xs">
             End of list.
           </div>
         )}
@@ -41,14 +41,14 @@ const Loadmore = ({
           setPage((prev) => prev + 1);
           fetchNextPage();
         }}
-        className="loadmore h-full relative my-8 text-primary p-1.5 rounded-full w-36 mx-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:!bg-transparent"
+        className="loadmore h-full relative my-2 text-primary p-1.5 rounded-full w-36 mx-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:!bg-transparent"
       >
         {isFetchingNextPage ? <ButtonSpinner /> : <span className="text-white">Load more</span>}
       </button>
     );
   }
   if(!hasNextPage && result?.count > 0 && !isSearchOrFilter) {
-    return <div className="my-6 p-1.5 text-white">End OF List</div>
+    return <div className="my-2 p-1.5 text-white">End OF List</div>
   }
 };
 
