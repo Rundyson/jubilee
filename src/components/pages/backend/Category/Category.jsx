@@ -7,10 +7,10 @@ import Footer from "../partials/Footer";
 import { StoreContext } from "@/components/store/storeContext";
 import { setIsAdd } from "@/components/store/storeAction";
 import ToastSuccess from "../partials/ToastSuccess";
-import ModalError from "../partials/modals/ModalError";
-import ModalValidation from "../partials/modals/ModalValidation";
 import ModalAddCategory from "./ModalAddCategory";
 import CategoryTable from "./CategoryTable";
+import ModalError from "@/components/partials/modal/ModalError";
+import ModalValidation from "../partials/modals/ModalValidation";
 
 const Category = () => {
   const { dispatch, store } = React.useContext(StoreContext);

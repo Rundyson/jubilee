@@ -8,11 +8,21 @@ RewriteCond %{REQUEST_FILENAME} !-f
 Header set Access-Control-Allow-Origin *
  
 
+RewriteRule ^upload-photo$ core/upload-photo.php [L]
+
 RewriteRule ^category$ controllers/category/category.php [L]
 RewriteRule ^category/([0-9]+)$ controllers/category/category.php?categoryid=$1 [L]
 RewriteRule ^category/active/([0-9]+)$ controllers/category/active.php?categoryid=$1 [L]
 RewriteRule ^category/page/([0-9]+)$ controllers/category/page.php?start=$1 [L]
 RewriteRule ^category/search$ controllers/category/search.php [L]
+
+
+### DEVELOPER ###
+RewriteRule ^developer$ controllers/developer/settings/user/developer/developer.php [L]
+RewriteRule ^developer/([0-9]+)$ controllers/developer/settings/user/developer/developer.php?developerid=$1 [L]
+RewriteRule ^developer/active/([0-9]+)$ controllers/developer/settings/user/developer/active.php?developerid=$1 [L]
+RewriteRule ^developer/page/([0-9]+)$ controllers/developer/settings/user/developer/page.php?start=$1 [L]
+RewriteRule ^developer/search$ controllers/developer/settings/user/developer/search.php [L]
 
 RewriteRule ^role$ controllers/settings/users/role/role.php [L]
 RewriteRule ^role/([0-9]+)$ controllers/settings/users/role/role.php?roleid=$1 [L]

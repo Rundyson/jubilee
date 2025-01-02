@@ -44,6 +44,12 @@ export const setError = (val) => {
         payload: val,
     };
     };
+       export const setCreatePassSuccess = (val) => {
+         return {
+           type: "IS_CREATE_PASS_SUCCESS",
+           payload: val,
+         };
+       };
 
 
     export const setIsDelete = (val) => {

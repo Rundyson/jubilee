@@ -1,6 +1,6 @@
 import { GetFocus } from "@/components/helpers/functions-general";
-import { setError } from "@/store/storeAction";
-import { StoreContext } from "@/store/storeContext";
+import { setError } from "@/components/store/storeAction";
+import { StoreContext } from "@/components/store/storeContext";
 import React from "react";
 const ModalError = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -24,7 +24,7 @@ const ModalError = () => {
       <div
         className={`fixed z-[99] top-10 left-1/2 -translate-x-1/2 w-full flex items-center justify-between gap-2 max-w-sm p-4 mb-4 text-dark bg-white rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)]  transform duration-200 ease-in-out ${animate}`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 text-black">
           <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-100 bg-orange-500 rounded-lg ">
             <svg
               className="w-5 h-5"

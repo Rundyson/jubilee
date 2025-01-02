@@ -65,8 +65,8 @@ const RoleList = ({ setItemEdit }) => {
               <tr>
                 <th>#</th>
                 <th>Status</th>
-                <th className="w-[50%]">Title</th>
-                <th>Role Desc</th>
+                <th className="w-[50%]">Role Name</th>
+                <th>Description</th>
                 <th></th>
                 <th></th>
               </tr>

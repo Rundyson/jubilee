@@ -98,6 +98,12 @@ export const StoreReducer = (state, action) => {
           ...state,
           isAnimating: action.payload,
         };
+
+      case "IS_CREATE_PASS_SUCCESS":
+        return {
+          ...state,
+          isCreatePassSuccess: action.payload,
+        };
   
   
   

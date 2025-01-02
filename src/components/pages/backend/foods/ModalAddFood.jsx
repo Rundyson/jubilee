@@ -19,7 +19,7 @@ import { queryData } from "@/components/helpers/queryData";
 
 const ModalAddFood = ({ itemEdit }) => {
   const { dispatch } = React.useContext(StoreContext);
-  const { uploadPhoto, handleChangePhoto, photo } = useUploadPhoto("");
+  const { uploadPhoto, handleChangePhoto, photo } = useUploadPhoto("/v2/upload-photo");
   const [value, setValue] = React.useState("");
 
   const handleClose = () => {
@@ -98,6 +98,7 @@ const ModalAddFood = ({ itemEdit }) => {
             initialValues={initVal}
             validationSchema={yupSchema}
             onSubmit={async (values) => {
+               uploadPhoto();
               mutation.mutate({
                 ...values,
                 food_image:
@@ -108,7 +109,7 @@ const ModalAddFood = ({ itemEdit }) => {
                     ? photo?.name || ""
                     : itemEdit?.food_image || "",
               });
-              uploadPhoto();
+             
             }}
           >
             {(props) => {
@@ -173,7 +174,7 @@ const ModalAddFood = ({ itemEdit }) => {
                           name="food_category_id"
                           onChange={handleChange}
                         >
-                          <option value="hidden">Select Category</option>
+                          <option value="" hidden>Select Category</option>
                           {categ?.data.map((item, key) => {
                             return (
                               <>
