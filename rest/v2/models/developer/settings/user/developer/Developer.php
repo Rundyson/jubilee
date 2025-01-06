@@ -73,7 +73,7 @@ class Developer {
         try {
             $sql = "select * from {$this->tblDeveloper} ";
             $sql .= "order by user_developer_is_active desc, ";
-            $sql .= "user_developer_first_name ";
+            $sql .= "user_developer_first_name, ";
             $sql .= "user_developer_last_name ";
             $query = $this->connection->query($sql);
         } catch (PDOException $ex) {
@@ -87,7 +87,7 @@ class Developer {
         try {
             $sql = "select * from {$this->tblDeveloper} ";
             $sql .= "order by user_developer_is_active desc, ";
-            $sql .= "user_developer_first_name ";
+            $sql .= "user_developer_first_name, ";
             $sql .= "user_developer_last_name ";
             $sql .= "limit :start, ";
             $sql .= ":total ";
@@ -110,7 +110,7 @@ class Developer {
             $sql .= "or user_developer_last_name like :user_developer_last_name ";
             $sql .= "or user_developer_email like :user_developer_email ";
             $sql .= "order by user_developer_is_active desc, ";
-            $sql .= "user_developer_first_name ";
+            $sql .= "user_developer_first_name, ";
             $sql .= "user_developer_last_name ";
             $query = $this->connection->prepare($sql);
             $query->execute([
@@ -130,13 +130,13 @@ class Developer {
             $sql = "select ";
             $sql .= "dev.*, ";
             $sql .= "role.* ";
-            $sql .= "role.* from {$this->tblDeveloper} as dev, ";
+            $sql .= "from {$this->tblDeveloper} as dev, ";
             $sql .= "{$this->tblRole} as role ";
             $sql .= "where ";
             $sql .= "dev.user_developer_role_id = role.role_aid ";
             $sql .= "and dev.user_developer_is_active = :user_developer_is_active ";
-            $sql .= "order by user_developer_is_active desc, ";
-            $sql .= "dev.user_developer_first_name ";
+            $sql .= "order by dev.user_developer_is_active desc, ";
+            $sql .= "dev.user_developer_first_name, ";
             $sql .= "dev.user_developer_last_name ";
             $query = $this->connection->prepare($sql);
             $query->execute([
@@ -153,11 +153,11 @@ class Developer {
             $sql = "select ";
             $sql .= "dev.*, ";
             $sql .= "role.* ";
-            $sql .= "role.* from {$this->tblDeveloper} as dev, ";
+            $sql .= "from {$this->tblDeveloper} as dev, ";
             $sql .= "{$this->tblRole} as role ";
             $sql .= "where ";
             $sql .= "dev.user_developer_role_id = role.role_aid ";
-            $sql .= "and user_developer_is_active = :user_developer_is_active ";
+            $sql .= "and dev.user_developer_is_active = :user_developer_is_active ";
             $sql .= "and ";
             $sql .= " ( ";
             $sql .= "dev.user_developer_first_name like :user_developer_first_name ";
@@ -165,14 +165,14 @@ class Developer {
             $sql .= "or dev.user_developer_email like :user_developer_email ";
             $sql .= " ) ";
             $sql .= "order by dev.user_developer_is_active desc, ";
-            $sql .= "dev.user_developer_first_name ";
+            $sql .= "dev.user_developer_first_name, ";
             $sql .= "dev.user_developer_last_name ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "user_developer_is_active" => $this->user_developer_is_active,
                 "user_developer_first_name" => "%{$this->developer_search}%",
-                "user_developerlast_name" => "%{$this->developer_search}%",
-                "user_developer_emaik" => "%{$this->developer_search}%",
+                "user_developer_last_name" => "%{$this->developer_search}%",
+                "user_developer_email" => "%{$this->developer_search}%",
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -207,7 +207,7 @@ class Developer {
             $sql = "select ";
             $sql .= "dev.*, ";
             $sql .= "role.* ";
-            $sql .= "role.* from {$this->tblDeveloper} as dev, ";
+            $sql .= "from {$this->tblDeveloper} as dev, ";
             $sql .= "{$this->tblRole} as role ";
             $sql .= "where ";
             $sql .= "dev.user_developer_role_id = role.role_aid ";
@@ -230,7 +230,7 @@ class Developer {
             $sql = "select ";
             $sql .= "dev.*, ";
             $sql .= "role.* ";
-            $sql .= "role.* from {$this->tblDeveloper} as dev, ";
+            $sql .= "from {$this->tblDeveloper} as dev, ";
             $sql .= "{$this->tblRole} as role ";
             $sql .= "where ";
             $sql .= "dev.user_developer_role_id = role.role_aid ";
@@ -330,12 +330,12 @@ class Developer {
         try {
             $sql = "update {$this->tblDeveloper} set ";
             $sql .= "user_developer_password = :user_developer_password, ";
-            $sql .= "user_developer_key = '' ";
+            $sql .= "user_developer_key = '', ";
             $sql .= "user_developer_datetime = :user_developer_datetime ";
             $sql .= "where user_developer_key  = :user_developer_key ";
             $query = $this->connection->prepare($sql);
             $query->execute([
-                "user_developer_key" => $this->user_developer_key,
+                "user_developer_password" => $this->user_developer_password,
                 "user_developer_datetime" => $this->user_developer_datetime,
                 "user_developer_key" => $this->user_developer_key
             ]);

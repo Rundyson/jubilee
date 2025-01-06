@@ -25,9 +25,9 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 
     $category->category_search = $data['searchValue'];
     http_response_code(200);
-    if($data['isFilter']) {
+    if ($data['isFilter']) {
         $category->category_is_active = checkIndex($data, 'statusFilter');
-        if($category->category_search != '') {
+        if ($category->category_search != '') {
             $query = checkFilterActiveSearch($category);
             getQueriedData($query);
         }

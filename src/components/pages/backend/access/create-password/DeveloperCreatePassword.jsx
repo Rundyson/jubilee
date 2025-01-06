@@ -1,4 +1,8 @@
-import { devNavUrl, getUrlParam, imgPath } from "@/components/helpers/functions-general";
+import {
+  devNavUrl,
+  getUrlParam,
+  imgPath,
+} from "@/components/helpers/functions-general";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -17,37 +21,43 @@ import useQueryData from "@/components/custom-hook/useQueryData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryData } from "@/components/helpers/queryData";
 import { StoreContext } from "@/components/store/storeContext";
-import { setCreatePassSuccess, setError, setMessage } from "@/components/store/storeAction";
+import {
+  setCreatePassSuccess,
+  setError,
+  setMessage,
+} from "@/components/store/storeAction";
+import FetchingSpinner from "@/components/partials/spinner/FetchingSpinner";
 
 const DeveloperCreatePassword = () => {
-    const {dispatch, store} = React.useContext(StoreContext);
-    const paramKey = getUrlParam().get("key");
-    const queryClient = useQueryClient();
-    const {isLoading, data:key} = useQueryData (
-        `/v2/developer/key/${paramKey}`,
-        "get",
-        "developer/key"
-    );
-    const mutation = useMutation ({
-        mutationFn: (values) => queryData(`/v2/developer/password`, "post",values),
-        onSuccess: (data) => {
-            queryClient.invalidateQueries({
-                queries: ["developer"]
-            });
-            if (!data.success) {
-                dispatch(setError(true));
-                dispatch(setMessage(data.error));
-            }
-            else {
-                if(store.isCreatePassSuccess) {
-                    dispatch(setCreatePassSuccess(false));
-                    navigate(
-                        `${devNavUrl}/create-password-success?redirect=/developer/login`
-                    )
-                }
-            }
-        }
-    });
+  const { dispatch, store } = React.useContext(StoreContext);
+  const paramKey = getUrlParam().get("key");
+  const queryClient = useQueryClient();
+  const { isLoading, data: key } = useQueryData(
+    `/v2/developer/key/${paramKey}`,
+    "get",
+    "developer/key"
+  );
+  const mutation = useMutation({
+    mutationFn: (values) => queryData(`/v2/developer/password`, "post", values),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queries: ["developer"],
+      });
+      if (!data.success) {
+        dispatch(setError(true));
+        dispatch(setMessage(data.error));
+      } else {
+        // if (store.isCreatePassSuccess) {
+        //   dispatch(setCreatePassSuccess(false));
+        //   navigate(
+        //     `${devNavUrl}/create-password-success?redirect=/developer/login`
+        //   );
+          
+        // }
+        setSuccess(true);
+      }
+    },
+  });
   const [theme, setTheme] = React.useState(localStorage.getItem("theme"));
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
@@ -121,6 +131,7 @@ const DeveloperCreatePassword = () => {
   const initVal = {
     confirm_password: "",
     new_password: "",
+    key: paramKey,
   };
 
   const yupSchema = Yup.object({
@@ -157,11 +168,13 @@ const DeveloperCreatePassword = () => {
               Back To Login
             </Link>
           </div>
-        ) : (
+        ) : isLoading ?  ( <FetchingSpinner/> )
+        : key?.count === 0 || paramKey === null || paramKey === "" ? ( "invalid") : (
           <Formik
             initialValues={initVal}
             validationSchema={yupSchema}
             onSubmit={async (values) => {
+              mutation.mutate(values);
               console.log(values);
             }}
           >
@@ -287,12 +300,12 @@ const DeveloperCreatePassword = () => {
 
                   <button
                     className="btn btn-accent w-full center-all mt-5"
-                    onClick={() => setSuccess(true)}
+                    // onClick={() => setSuccess(true)}
+                    disabled={mutation.isPending || props.values.new_password === "" || props.values.confirm_password === ""}
                     type="submit"
                   >
                     {" "}
-                    <SpinnerButton />
-                    Set Password
+                    {mutation.isPending ? <SpinnerButton /> : "Set Password"}
                   </button>
                 </Form>
               );

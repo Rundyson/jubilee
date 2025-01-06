@@ -30,13 +30,12 @@ const DeveloperList = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [dataItem, setDataItem] = React.useState("");
-    const [isFilter, setIsFilter] = React.useState(false);
-    const [onSearch, setOnSearch] = React.useState(false);
-    const [statusFilter, setStatusFilter] = React.useState("");
-    const search = React.useRef({ value: "" });
-    const [page, setPage] = React.useState(1);
-    const { ref, inView } = useInView();
-
+  const [isFilter, setIsFilter] = React.useState(false);
+  const [onSearch, setOnSearch] = React.useState(false);
+  const [statusFilter, setStatusFilter] = React.useState("");
+  const search = React.useRef({ value: "" });
+  const [page, setPage] = React.useState(1);
+  const { ref, inView } = useInView();
 
   let counter = 1;
   const handleDelete = (item) => {
@@ -56,44 +55,44 @@ const DeveloperList = ({ setItemEdit }) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
   };
- const {
-   data: result,
-   error,
-   isLoading,
-   fetchNextPage,
-   hasNextPage,
-   isFetching,
-   isFetchingNextPage,
-   status,
- } = useInfiniteQuery({
-   queryKey: ["developer", onSearch, isFilter, statusFilter],
-   queryFn: async ({ pageParam = 1 }) =>
-     await queryDataInfinite(
-       "/v2/developer/search", // search or filter endpoint
-       `/v2/developer/page/${pageParam}`, //page api/endpoint
-       isFilter || store.isSearch, // search boolean
-       {
-         statusFilter,
-         isFilter,
-         searchValue: search?.current.value,
-         id: "",
-       }
-     ),
-   getNextPageParam: (lastPage) => {
-     if (lastPage.page < lastPage.total) {
-       return lastPage.page + lastPage.count;
-     }
-     return;
-   },
-   refetchOnWindowFocus: false,
- });
+  const {
+    data: result,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["developer", onSearch, isFilter, statusFilter],
+    queryFn: async ({ pageParam = 1 }) =>
+      await queryDataInfinite(
+        "/v2/developer/search", // search or filter endpoint
+        `/v2/developer/page/${pageParam}`, //page api/endpoint
+        isFilter || store.isSearch, // search boolean
+        {
+          statusFilter,
+          isFilter,
+          searchValue: search?.current.value,
+          id: "",
+        }
+      ),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total) {
+        return lastPage.page + lastPage.count;
+      }
+      return;
+    },
+    refetchOnWindowFocus: false,
+  });
 
- React.useEffect(() => {
-   if (inView) {
-     setPage((prev) => prev + 1);
-     fetchNextPage();
-   }
- }, [inView]);
+  React.useEffect(() => {
+    if (inView) {
+      setPage((prev) => prev + 1);
+      fetchNextPage();
+    }
+  }, [inView]);
   return (
     <>
       <div>
@@ -118,9 +117,9 @@ const DeveloperList = ({ setItemEdit }) => {
               <tr>
                 <th>#</th>
                 <th>Status</th>
-                <th className="w-[50%]">Name</th>
-                <th>Email</th>
-                <th></th>
+                <th className="w-[50%]">Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th></th>
               </tr>
             </thead>
@@ -154,7 +153,9 @@ const DeveloperList = ({ setItemEdit }) => {
                         <td>
                           <Pills isActive={item.user_developer_is_active} />
                         </td>
-                        <td>{item.category_title}</td>
+                        <td>{item.user_developer_email}</td>
+                        <td>{item.user_developer_first_name}</td>
+                        <td>{item.user_developer_last_name}</td>
                         <td colSpan="100%" className="opacity-100">
                           <div className="flex items-center justify-end gap-2 mr-4">
                             {item.user_developer_is_active === 1 ? (

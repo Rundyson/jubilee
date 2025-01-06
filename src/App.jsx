@@ -16,29 +16,30 @@ import Role from './components/pages/backend/settings/role/Role'
 import { routeAdmin } from './routes/routesAdmin'
 import { routeDeveloper } from './routes/routesDeveloper'
 import DeveloperCreatePassword from './components/pages/backend/access/create-password/DeveloperCreatePassword'
+import DeveloperLogin from './components/pages/backend/access/DeveloperLogin'
 
 const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-    <StoreProvider>
-    <Router>
-      <Routes>
-        <Route index element ={<Welcome/>} />
-        <Route path="/order" element ={<Order/>} />
+      <StoreProvider>
+        <Router>
+          <Routes>
+            <Route index element={<Welcome />} />
+            <Route path="/order" element={<Order />} />
 
-        {routeAdmin.map((item, key) => {
-          return (
-            <Route path={item.route} key={key} element={item.element} />
-          );
-        })}
+            {routeAdmin.map((item, key) => {
+              return (
+                <Route path={item.route} key={key} element={item.element} />
+              );
+            })}
 
-        {routeDeveloper.map((item, key) => {
-          return (
-            <Route path={item.route} key={key} element={item.element} />
-          );
-        })}
-        {/* <Route path="/admin/dashboard" element ={<Dashboard/>} />
+            {routeDeveloper.map((item, key) => {
+              return (
+                <Route path={item.route} key={key} element={item.element} />
+              );
+            })}
+            {/* <Route path="/admin/dashboard" element ={<Dashboard/>} />
         <Route path="/admin/settings" element ={<Settings/>} />
         <Route path="/settings/role" element ={<Role/>} />
         <Route path="/settings/developer" element ={<Settings/>} />
@@ -47,13 +48,18 @@ const App = () => {
         <Route path="/admin/foods" element ={<Food/>} />
         <Route path="/admin/category" element ={<Category/>} /> */}
 
-        <Route path="/admin/login" element ={<Login/>} />
-        <Route path="/admin/set-password" element ={<SetPassword/>} />
-        <Route path="/developer/create-password" element ={<DeveloperCreatePassword/>} />
-        <Route path="/admin/forgot-password" element ={<ForgotPassword/>} />
-      </Routes>
-    </Router>
-    </StoreProvider>
+            <Route path="/developer/login" element={<DeveloperLogin />} />
+
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin/set-password" element={<SetPassword />} />
+            <Route
+              path="/developer/create-password"
+              element={<DeveloperCreatePassword />}
+            />
+            <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        </Router>
+      </StoreProvider>
     </QueryClientProvider>
   );
 };
