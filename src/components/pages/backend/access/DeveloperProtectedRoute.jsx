@@ -62,10 +62,12 @@ const DeveloperProtectedRoute = ({ children }) => {
           <FetchingSpinner />
         ) : isAuth === "123" ? (
           children
-        ) : (
+        ) : isAuth === "456" ? (
           <Navigate to={`${devNavUrl}/developer/login`} />
+        ) : (
+          <p>End point Not Found.</p>
         )}
-        ;
+        
       </>
     );
   }
